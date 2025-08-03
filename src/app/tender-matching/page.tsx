@@ -283,25 +283,6 @@ export default function TenderMatchingPage() {
     }, 10)
   }
 
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragOver(true)
-  }, [])
-
-  const handleDragLeave = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragOver(false)
-  }, [])
-
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragOver(false)
-    const files = Array.from(e.dataTransfer.files)
-    if (files.length > 0) {
-      handleFileUpload(files[0])
-    }
-  }, [])
-
   const handleFileUpload = async (file: File) => {
     const maxSize = 4.5 * 1024 * 1024 // 4.5MB in bytes
     if (file.size > maxSize) {
@@ -320,7 +301,7 @@ export default function TenderMatchingPage() {
     // Simulate upload progress
     setUploadedTender((prev) => prev && { ...prev, progress: 30, status: "uploading" })
     // Call server action to upload and process the tender
-    const response = await uploadTenderAction(file)
+    const response = await uploadTenderAction(file) as { status: string; result?: TenderResult }
     if (response && response.status === "processed" && response.result) {
       setUploadedTender((prev) =>
         prev
@@ -346,6 +327,25 @@ export default function TenderMatchingPage() {
       showToast("Tender processing failed.")
     }
   }
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(true)
+  }, [])
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(false)
+  }, [])
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(false)
+    const files = Array.from(e.dataTransfer.files)
+    if (files.length > 0) {
+      handleFileUpload(files[0])
+    }
+  }, [handleFileUpload])
 
   const formatFileSize = (bytes: number) => {
     if (bytes === 0) return "0 Bytes"

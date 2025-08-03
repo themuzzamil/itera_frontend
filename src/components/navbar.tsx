@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
+import Link from "next/link"
 
 export function Navbar() {
   return (
@@ -8,7 +7,8 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 rounded-lg flex items-center justify-center">
-              <Image 
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
                 src="/Cynosureicon.webp" 
                 alt="IteraAI Logo" 
                 width={36} 
@@ -22,21 +22,21 @@ export function Navbar() {
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-8">
-            <a href="/" className="text-gray-700 hover:text-primary transition-colors">
+            <Link href="/" className="text-gray-700 hover:text-primary transition-colors">
               Home
-            </a>
-            <a href="/cv-parsing" className="text-gray-700 hover:text-primary transition-colors">
+            </Link>
+            <Link href="/cv-parsing" className="text-gray-700 hover:text-primary transition-colors">
               CV Parsing
-            </a>
-            <a href="/europass-formatting" className="text-gray-700 hover:text-primary transition-colors">
+            </Link>
+            <Link href="/europass-formatting" className="text-gray-700 hover:text-primary transition-colors">
               Europass Formatting
-            </a>
-            <a href="/expert-profile" className="text-gray-700 hover:text-primary transition-colors">
+            </Link>
+            <Link href="/expert-profile" className="text-gray-700 hover:text-primary transition-colors">
               Expert Profile
-            </a>
-            <a href="/tender-matching" className="text-gray-700 hover:text-primary transition-colors">
+            </Link>
+            <Link href="/tender-matching" className="text-gray-700 hover:text-primary transition-colors">
               Tender Matching
-            </a>
+            </Link>
             {/* <Button className="bg-primary hover:bg-primary-600 text-white font-semibold">Get Started</Button> */}
           </div>
         </div>
